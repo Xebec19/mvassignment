@@ -1,5 +1,6 @@
 import React from 'react';
 import Nav from '../etc/Nav';
+import '../../App.css';
 import 'tachyons';
 
 function Create(){
@@ -37,7 +38,15 @@ function Create(){
 	        <tr className="stripe-dark">
 	          <td className="pa3">Organization</td>
 	          <td className="pa3">
-	          <input type="text" />
+	          <div className="dropdown">
+	          <button className="dropbtn">
+	          Organization</button>
+	          <div className="dropdown-content">
+	          <p>Org1</p>
+	          <p>Org2</p>
+	          <p>Org3</p>
+	          </div>
+	          </div>
 	          </td>
 	        </tr>
 	        <tr className="stripe-dark">
