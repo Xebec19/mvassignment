@@ -17,11 +17,23 @@ function App() {
           <Login />
         </Route>
 
+        <Route exact path="/view/:id">
+          <Login />
+        </Route>
+
         <Route exact path="/register">
           <Register />
         </Route>
         
-        <Route exact path="/dashboard">
+        <Route path="/dashboard/:id">
+          <Dashboard />
+        </Route>
+
+        <Route path="/dashboard/view/:id">
+          <Dashboard />
+        </Route>
+
+        <Route path="/dashboard/create/:id">
           <Dashboard />
         </Route>
 

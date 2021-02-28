@@ -1,4 +1,5 @@
 import React from 'react';
+import Nav from '../etc/Nav';
 import {
   Link
 } from "react-router-dom";
@@ -8,6 +9,7 @@ import 'tachyons';
 function Register(){
 	return(
 		<div>
+		<Nav />
 	{/*this article makes things centered*/}
 		<article className="vh-100 dt w-100">
 			<div className="dtc v-mid tc black ph3 ph4-l">
@@ -31,7 +33,9 @@ function Register(){
 				      
 				    </fieldset>
 				    <div className="">
-				      <input className="b ph3 pv2 input-reset ba b--black bg-transparent dim pointer f6 dib" type="submit" value="Sign up" />
+				      <Link to="dashboard" className="b ph3 link pv2 input-reset ba b--black black bg-transparent dim pointer f6 dib" >
+				      Register
+				      </Link>
 				    </div>
 				    <div className="lh-copy mt3">
 				      <Link to="/" className="f6 link dim black db">Already have an account ?</Link>
