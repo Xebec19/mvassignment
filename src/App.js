@@ -7,6 +7,7 @@ import {
 import Login from './components/pages/Login';
 import Register from './components/pages/Register';
 import Dashboard from './components/pages/Dashboard';
+import Create from './components/pages/Create';
 import './App.css';
 
 function App() {
@@ -25,15 +26,11 @@ function App() {
           <Register />
         </Route>
         
-        <Route path="/dashboard/:id">
-          <Dashboard />
-        </Route>
-
-        <Route path="/dashboard/view/:id">
-          <Dashboard />
-        </Route>
-
         <Route path="/dashboard/create/:id">
+          <Create />
+        </Route>
+        
+        <Route path="/dashboard/:id">
           <Dashboard />
         </Route>
 

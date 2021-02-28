@@ -29,7 +29,7 @@ function Nav(){
   		<Link to="/" className="link dim white dib mr3">
 	      Logout
 	    </Link>
-	    <Link to={`/dashboard/view/${id}`} className="link dim white dib mr3">
+	    <Link to={`/dashboard/${id}`} className="link dim white dib mr3">
 	      View
 	    </Link>
 	    <Link to={`/dashboard/create/${id}`} className="link dim white dib mr3">
@@ -47,7 +47,7 @@ function Nav(){
   			)
   	}
   return(
-    <header className="bg-black-90 fixed w-100 ph3 pv3 pv4-ns ph4-m ph5-l">
+    <header className="bg-black-90 w-100 ph3 pv3 pv4-ns ph4-m ph5-l">
 	  <nav className="f6 fw6 ttu tracked">
 	    {navLinks}
 	  </nav>
