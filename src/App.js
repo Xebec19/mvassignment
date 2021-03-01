@@ -26,7 +26,7 @@ function App() {
           <Register />
         </Route>
         
-        <Route path="/dashboard/create/:id">
+        <Route path="/dashboard/create">
           <Create />
         </Route>
         

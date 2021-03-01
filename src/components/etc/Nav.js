@@ -3,9 +3,25 @@ import {
   Link,
   useLocation
 } from "react-router-dom";
+import { auth } from '../../config/firebase';
 import 'tachyons';
 
 function Nav(){
+  
+  const signout = () => {
+    try{
+      auth().signout().then(() => {
+      console.log("Signed out");
+    })
+    .catch((error) => {
+      console.log("Snap")
+    })
+  }
+  catch(err) {
+    console.log("Error",err);
+  }
+  }  //signout ends here
+
   const id = 'asd';
   const location = useLocation();
   console.log(`location is ${location.pathname}`);
@@ -26,13 +42,16 @@ function Nav(){
   else if(location.pathname.includes('dashboard')){
   	navLinks = (
   		<div>
-  		<Link to="/" className="link dim white dib mr3">
+  		<Link 
+      onClick={() => signout()}
+      className="link dim white dib mr3"
+      to="/">
 	      Logout
 	    </Link>
-	    <Link to={`/dashboard/${id}`} className="link dim white dib mr3">
+	    <Link to={`/dashboard`} className="link dim white dib mr3">
 	      View
 	    </Link>
-	    <Link to={`/dashboard/create/${id}`} className="link dim white dib mr3">
+	    <Link to={`/dashboard/create`} className="link dim white dib mr3">
 	      Create
 	    </Link>
 	    </div>

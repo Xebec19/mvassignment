@@ -6,7 +6,7 @@ import 'tachyons';
 function Dashboard(){
 	const [filter,setFilter] = useState('null');
 	useEffect(() => {
-		console.log(filter);
+		console.log("The filter is",filter);
 	},[filter])
 	return(
 		<div>

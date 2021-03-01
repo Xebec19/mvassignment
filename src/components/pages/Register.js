@@ -1,4 +1,5 @@
-import React from 'react';
+import React,{ useState,useEffect } from 'react';
+import { auth } from "../../config/firebase";
 import Nav from '../etc/Nav';
 import {
   Link
@@ -7,6 +8,39 @@ import {
 import 'tachyons';
 
 function Register(){
+	const [email,setEmail] = useState('');
+	const [password,setPassword] = useState('');
+	const [error,setError] = useState('');
+	
+	function valdEmail(){
+		if(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email))
+		{
+		return (true)
+		}
+		return (false)
+		}
+
+	function handleSubmit(props){
+		if(email==='' || password==='' || !valdEmail()){ 
+		setError('Invalid credentials');
+		return 0;
+		} 
+		else{
+		auth().createUserWithEmailAndPassword(email,password).then((userCredential) => {
+		var user = userCredential.user;
+		console.log(user);
+		console.log(userCredential.user.email);
+		setError(null);
+		})
+		.catch((error) => {
+		setError(error.message);
+		console.log(error.message);
+		})
+
+
+		}  //else ends here
+		}  //handleSubmit ends here
+
 	return(
 		<div>
 		<Nav />
@@ -24,16 +58,30 @@ function Register(){
 				        <label className="db fw6 lh-copy f6" htmlFor="email-address">
 				        Email
 				        </label>
-				        <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="email" name="email-address"  id="email-address" />
+				        <input 
+				        className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
+				        type="email" 
+				        name="email-address"  
+				        id="email-address" 
+				        onChange={(e) => setEmail(e.target.value)}/>
 				      </div>
 				      <div className="mv3">
 				        <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
-				        <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="password" name="password"  id="password" />
+				        <input 
+				        className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
+				        type="password" 
+				        name="password"  
+				        id="password" 
+				        onChange={(e) => setPassword(e.target.value)}/>
 				      </div>
 				      
 				    </fieldset>
+				    {error && <p style={{color:"red"}}>Invalid</p>}
 				    <div className="">
-				      <Link to="dashboard" className="b ph3 link pv2 input-reset ba b--black black bg-transparent dim pointer f6 dib" >
+				      <Link
+				      className="b ph3 link pv2 input-reset ba b--black black bg-transparent dim pointer f6 dib" 
+				      onClick={() => handleSubmit()}
+				      to={`/dashboard/${email}`}>
 				      Register
 				      </Link>
 				    </div>
