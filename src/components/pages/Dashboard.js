@@ -1,13 +1,33 @@
 import React,{ useState,useEffect } from 'react';
 import { FaFilter } from 'react-icons/fa';
+import {auth,db} from '../../config/firebase';
+import RecordList from '../etc/RecordList';
 import Nav from '../etc/Nav';
 import 'tachyons';
 
 function Dashboard(){
-	const [filter,setFilter] = useState('null');
+	const [filter,setFilter] = useState(null);
+	const [record,setRecord] = useState([]);
+	console.log('Record is',record);
+	console.log(auth().currentUser.uid);
 	useEffect(() => {
-		console.log("The filter is",filter);
+		console.log("Fired");
+		db.ref(auth().currentUser.email.replace(/\./g,'')).on
+		('value',snapshot => {
+			if(snapshot.val()!= null)
+			{
+				let temp = [];
+				let count = 0;
+				snapshot.forEach((item) => {
+					console.log(item.val())
+					temp.push(item.val())
+				})
+				console.log('Val ',temp);
+				setRecord(temp);
+			}
+		})
 	},[filter])
+	
 	return(
 		<div>
 		  <Nav />
@@ -45,14 +65,11 @@ function Dashboard(){
 			        </tr>
 			      </thead>
 			      <tbody className="lh-copy">
-			        
-			        <tr className="stripe-dark">
-			          <td className="pa3">Hassan Johnson</td>
-			          <td className="pa3">@hassan</td>
-			          <td className="pa3">hassan@companywithalongdomain.co</td>
-			          <td className="pa3">14419232532474</td>
-			          <td className="pa3">5</td>
-			        </tr>
+			          {record.map((value,index) => {
+			          	return <RecordList 
+					          {...value} 
+					          key={index}/>;
+			          })}
 			        
 			      </tbody>
 			    </table>

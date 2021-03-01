@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import 'firebase/database';
+import Notifications, {notify} from 'react-notify-toast';
 import {auth,db} from '../../config/firebase';
 import Nav from '../etc/Nav';
 
@@ -20,21 +21,22 @@ function Create(){
 	 org: org,
 	 ratings: ratings
 	}
-	console.log(auth().currentUser.email);
+	console.log("user",auth().currentUser.email);
 	function handleSubmit(){
 		if(name === '' || date=== '' || phone < 10000000 || ratings === ''){
 			setErr('Invalid');
 			return 0;
 		}
 		else{
-			console.log(object);
-			setErr('');
-			db.child('child').push(
+			db.ref(auth().currentUser.email.replace(/\./g,'')).push(
 				object,
-				err => {
-					if(err) console.log('Error while saving ',err);
-				}
+				  err => {
+					  if(err) console.log('Error while saving ',err);
+					}
 				)
+			setErr('');
+			notify.show('Done!');
+
 		}
 	}
 	if(!auth().currentUser.email)
@@ -48,6 +50,7 @@ function Create(){
 	return(
 		<div>
 		<Nav />
+		<Notifications />
 		<table className="f6 w-100 mw8 center" cellSpacing="0">
 	      <thead>
 	        <tr className="stripe-dark">

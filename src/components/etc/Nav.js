@@ -48,7 +48,7 @@ function Nav(){
       to="/">
 	      Logout
 	    </Link>
-	    <Link to={`/dashboard`} className="link dim white dib mr3">
+	    <Link to={`/dashboard/${auth().currentUser.email}`} className="link dim white dib mr3">
 	      View
 	    </Link>
 	    <Link to={`/dashboard/create`} className="link dim white dib mr3">
